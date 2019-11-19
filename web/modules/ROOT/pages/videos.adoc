@@ -1,2 +1,3 @@
 = Videos
-video::iITmoI0s1DQ[youtube]
+* https://youtu.be/UbtB4sMaaNM[What is DevOps^]
+* https://youtu.be/iITmoI0s1DQ[What is Continuous Improvement^]
