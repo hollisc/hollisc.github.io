@@ -1,1 +1,17 @@
 * xref:index.adoc[Welcome]
+
+* Tutorials
+** xref:deploy-bluecompute-ce.adoc[Deploy bluecompute-ce Cloud Native application on OpenShift]
+** xref:tekton-pipelines-bluecompute-ce.adoc[Configure Tekton Pipelines for bluecompute-ce]
+** xref:kabanero-pipelines-bluecompute-ce.adoc[Configure Kabanero Pipeline for bluecompute-ce]
+** xref:troubleshoot-tekton-pipelines.adoc[Troubleshoot Tekton Pipelines]
+
+* Blogs
+** https://medium.com/ibm-garage/2019-devops-trends-4f8f9b476ac7[2019 DevOps Trends]
+** https://medium.com/@acmThinks/devsecops-58e0aa323412[DevSecOps]
+** https://medium.com/@acmThinks/devsecops-design-development-fa46daddcae2[DevSecOps: Design & Development]
+** https://medium.com/ibm-garage/devsecops-delivery-7ca8c39d93[DevSecOps Secure Delivery]
+
+* Videos
+** https://youtu.be/UbtB4sMaaNM[What is DevOps?]
+** https://youtu.be/iITmoI0s1DQ[What is Continuous Improvement?]
