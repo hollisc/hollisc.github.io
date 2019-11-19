@@ -1,0 +1,5 @@
+= Blogs
+* https://medium.com/ibm-garage/2019-devops-trends-4f8f9b476ac7[2019 DevOps Trends^]
+* https://medium.com/@acmThinks/devsecops-58e0aa323412[DevSecOps^]
+* https://medium.com/@acmThinks/devsecops-design-development-fa46daddcae2[DevSecOps: Design & Development^]
+* https://medium.com/ibm-garage/devsecops-delivery-7ca8c39d93cf[DevSecOps Secure Delivery^]
