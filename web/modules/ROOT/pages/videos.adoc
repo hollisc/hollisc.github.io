@@ -1,6 +1,6 @@
 = Videos
-* video::UbtB4sMaaNM[youtube] 
-* video::iITmoI0s1DQ[youtube]
+video::UbtB4sMaaNM[youtube]
+video::iITmoI0s1DQ[youtube]
 
 
 * What is DevOps?
