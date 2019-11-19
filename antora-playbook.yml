@@ -1,7 +1,7 @@
 site:
   title: DevOps Garage Solution Engineering
   # the 404 page and sitemap files only get generated when the url property is set
-  url: https://hollisc.github.io/web
+  url: https://hollisc.github.io
   start_page: web::index.adoc
 content:
   sources:
