@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://hollisc.github.io/web/1.0.0/blogs.html</loc>
+<lastmod>2019-11-19T17:36:37.144Z</lastmod>
+</url>
+<url>
 <loc>https://hollisc.github.io/web/1.0.0/deploy-bluecompute-ce.html</loc>
-<lastmod>2019-11-19T14:46:19.595Z</lastmod>
+<lastmod>2019-11-19T17:36:37.144Z</lastmod>
 </url>
 <url>
 <loc>https://hollisc.github.io/web/1.0.0/index.html</loc>
-<lastmod>2019-11-19T14:46:19.595Z</lastmod>
+<lastmod>2019-11-19T17:36:37.144Z</lastmod>
 </url>
 <url>
 <loc>https://hollisc.github.io/web/1.0.0/kabanero-pipelines-bluecompute-ce.html</loc>
-<lastmod>2019-11-19T14:46:19.595Z</lastmod>
+<lastmod>2019-11-19T17:36:37.144Z</lastmod>
 </url>
 <url>
 <loc>https://hollisc.github.io/web/1.0.0/tekton-pipelines-bluecompute-ce.html</loc>
-<lastmod>2019-11-19T14:46:19.595Z</lastmod>
+<lastmod>2019-11-19T17:36:37.144Z</lastmod>
 </url>
 </urlset>
