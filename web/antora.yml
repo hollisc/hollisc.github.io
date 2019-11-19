@@ -3,5 +3,3 @@ title: DevOps Garage Solution Engineering
 version: 1.0.0
 nav:
 - modules/ROOT/nav.adoc
-- modules/lab/nav.adoc
-- modules/blogs/nav.adoc
