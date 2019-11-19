@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>https://hollisc.github.io/devops-gse/devops-gse/dev/index.html</loc>
-<lastmod>2019-11-19T00:02:17.399Z</lastmod>
-</url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap>
+<loc>https://hollisc.github.io/sitemap-component-a.xml</loc>
+</sitemap>
+<sitemap>
+<loc>https://hollisc.github.io/sitemap-component-b.xml</loc>
+</sitemap>
+</sitemapindex>

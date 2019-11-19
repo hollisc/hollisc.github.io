@@ -1,0 +1,5 @@
+name: devops-gse
+title: DevOps Garage Solution Engineering
+version: dev
+nav:
+- modules/ROOT/nav.adoc
