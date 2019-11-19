@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Deploying BlueCompute into OpenShift :: DevOps Garage Solution Engineering</title>
+    <link rel="canonical" href="https://hollisc.github.io/web/1.0.0/deploy-bluecompute-ce.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        DevOps Garage Solution Engineering
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="web" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">DevOps Garage Solution Engineering</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Welcome</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="deploy-bluecompute-ce.html">Deploy bluecompute-ce Cloud Native application on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="tekton-pipelines-bluecompute-ce.html">Configure Tekton Pipelines for bluecompute-ce</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="kabanero-pipelines-bluecompute-ce.html">Configure Kabanero Pipeline for bluecompute-ce</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#troubleshoot-tekton-pipelines.adoc">Troubleshoot Tekton Pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Blogs</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://medium.com/ibm-garage/2019-devops-trends-4f8f9b476ac7" target="_blank" rel="noopener">2019 DevOps Trends</a></span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://medium.com/@acmThinks/devsecops-58e0aa323412" target="_blank" rel="noopener">DevSecOps</a></span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://medium.com/@acmThinks/devsecops-design-development-fa46daddcae2" target="_blank" rel="noopener">DevSecOps: Design &amp; Development</a></span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://medium.com/ibm-garage/devsecops-delivery-7ca8c39d93cf" target="_blank" rel="noopener">DevSecOps Secure Delivery</a></span>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Videos</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://youtu.be/UbtB4sMaaNM" target="_blank" rel="noopener">What is DevOps?</a></span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://youtu.be/iITmoI0s1DQ" target="_blank" rel="noopener">What is Continuous Improvement?</a></span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevOps Garage Solution Engineering</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">DevOps Garage Solution Engineering</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main>
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">DevOps Garage Solution Engineering</a></li>
+    <li>Tutorials</li>
+    <li><a href="deploy-bluecompute-ce.html">Deploy bluecompute-ce Cloud Native application on OpenShift</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/hollisc/hollisc.github.io/edit/gh-pages/web/modules/ROOT/pages/deploy-bluecompute-ce.adoc">Edit this Page</a></div>
+  </div>
+<article class="doc">
+<h1 class="page">Deploying BlueCompute into OpenShift</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This <a href="https://github.ibm.com/CASE-DevOps-GSE/DevOps/blob/master/bluecompute-ce/README.md">README</a> provides the minimal steps to deploy the BlueCompute application into an OpenShift cluster without any persistent storage.  This is intentional to provide a quick starting point with a sample application.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/bluecompute-architecture.png" alt="BlueCompute Architecture">
+</div>
+</div>
+<div class="paragraph">
+<p>For more detailed information on BlueCompute application, refer to the <a href="https://github.com/ibm-cloud-architecture/refarch-cloudnative-kubernetes/blob/spring/docs/openshift/README.md">IBM Cloud Native Microservice Application</a> Github repository.</p>
+</div>
+<div class="paragraph">
+<p>For more detailed information on how the BlueCompute YAMLs were generated from existing HELM charts, refer to this <a href="https://github.com/ibm-cloud-architecture/refarch-cloudnative-kubernetes/blob/spring/docs/openshift/README.md#deploy-bluecompute-to-openshift">README</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements:</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>A deployed OpenShift cluster.</p>
+</li>
+<li>
+<p>Install the OpenShift CLI <code>oc</code>.</p>
+</li>
+<li>
+<p>Install the Kubernetes CLI <code>kubectl</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy_bluecompute"><a class="anchor" href="#_deploy_bluecompute"></a>Deploy BlueCompute</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new project called <code>bluecompute</code>.  This will also set the context of your <code>oc</code> and <code>kubectl</code> CLI to use this project/namespace so you do not need to specify the namespace when running CLI commands.</p>
+<div class="listingblock">
+<div class="content">
+<pre>oc new-project bluecompute</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add Security Context Constraints (SCC) to the <code>default</code> Service Account</p>
+<div class="listingblock">
+<div class="content">
+<pre>oc adm policy add-scc-to-user anyuid system:serviceaccount:bluecompute:default
+oc adm policy add-scc-to-user privileged system:serviceaccount:bluecompute:default</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Deploy BlueCompute</p>
+<div class="listingblock">
+<div class="content">
+<pre>git clone git@github.ibm.com:CASE-DevOps-GSE/DevOps.git
+cd DevOps
+cd bluecompute-ce
+oc apply --recursive --filename bluecompute-os</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verify deployment is successful</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>+
+= Check status of the pods.  The full deployment will take ~ 20 minutes.
++
+oc get pods -w
+
+= Expose the web application externally
+
+oc expose svc web
+
+= Retrieve the URL for the BlueCompute application.
+
+= If you are using a Managed OpenShift cluster on IBM Cloud, the URL will be similar to:
+
+= (web-bluecompute.+++&lt;cluster name=""&gt;+++-ibm-+++&lt;unique key=""&gt;+++.us-south.containers.appdomain.cloud).+++&lt;/unique&gt;++++++&lt;/cluster&gt;+++
+
+oc get route
+
+----
+
+Once all the pods are up and running, you should see something similar to below by running `oc get po`.
+You can ignore the pods with Error status.
+----
+
+NAME                                                                    READY   STATUS      RESTARTS   AGE
+auth-7d9dd6b655-j2pqx                                                   1/1     Running     0          5d
+bluecompute-customer-create-user-eavn9-87p7b                            0/1     Completed   0          5d
+bluecompute-customer-create-user-eavn9-m78qm                            0/1     Error       0          5d
+bluecompute-inventory-populate-mysql-x3fc9-xsz7j                        0/1     Completed   0          5d
+bluecompute-mariadb-0                                                   1/1     Running     0          5d
+bluecompute-orders-mariadb-test-22izx                                   0/1     Error       0          5d
+catalog-676c768558-ltwbw                                                1/1     Running     0          5d
+catalog-elasticsearch-client-856c6b8fc-2x4tr                            1/1     Running     0          5d
+catalog-elasticsearch-data-0                                            1/1     Running     0          5d
+catalog-elasticsearch-master-0                                          1/1     Running     0          5d
+catalog-elasticsearch-master-1                                          1/1     Running     0          5d
+customer-844585bd64-vkvld                                               1/1     Running     0          5d
+customer-couchdb-couchdb-0                                              2/2     Running     9          5d
+inventory-75b58655ff-nsh8s                                              1/1     Running     0          5d
+inventory-mysql-7d84694976-cxnbk                                        1/1     Running     0          5d
+inventory-mysql-test                                                    0/1     Error       0          5d
+orders-84f875dbc7-pxrwm                                                 1/1     Running     0          5d
+web-7469bf44c4-kjbsx                                                    1/1     Running     0          5d
+
+----
+
+Open the application URL in a browser and click through the menu items.  You can log in with the account `user / passw0rd`.
+
+![BlueCompute Homepage](../static/imgs/bluecompute-homepage.png)
+
+## Delete Bluecompute:
+----
+
+= Delete the application route
+
+oc delete route web
+
+= Delete all resources using YAML files
+
+oc delete --recursive --filename bluecompute-os</code></pre>
+</div>
+</div>
+</div>
+</div>
+</article>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

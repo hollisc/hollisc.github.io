@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Configure a Tekton CICD Pipeline for the Web application :: DevOps Garage Solution Engineering</title>
+    <link rel="canonical" href="https://hollisc.github.io/web/1.0.0/tekton-pipelines-bluecompute-ce.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        DevOps Garage Solution Engineering
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="web" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">DevOps Garage Solution Engineering</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Welcome</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="deploy-bluecompute-ce.html">Deploy bluecompute-ce Cloud Native application on OpenShift</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="tekton-pipelines-bluecompute-ce.html">Configure Tekton Pipelines for bluecompute-ce</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="kabanero-pipelines-bluecompute-ce.html">Configure Kabanero Pipeline for bluecompute-ce</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#troubleshoot-tekton-pipelines.adoc">Troubleshoot Tekton Pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Blogs</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://medium.com/ibm-garage/2019-devops-trends-4f8f9b476ac7" target="_blank" rel="noopener">2019 DevOps Trends</a></span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://medium.com/@acmThinks/devsecops-58e0aa323412" target="_blank" rel="noopener">DevSecOps</a></span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://medium.com/@acmThinks/devsecops-design-development-fa46daddcae2" target="_blank" rel="noopener">DevSecOps: Design &amp; Development</a></span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://medium.com/ibm-garage/devsecops-delivery-7ca8c39d93cf" target="_blank" rel="noopener">DevSecOps Secure Delivery</a></span>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Videos</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://youtu.be/UbtB4sMaaNM" target="_blank" rel="noopener">What is DevOps?</a></span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://youtu.be/iITmoI0s1DQ" target="_blank" rel="noopener">What is Continuous Improvement?</a></span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevOps Garage Solution Engineering</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">DevOps Garage Solution Engineering</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main>
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">DevOps Garage Solution Engineering</a></li>
+    <li>Tutorials</li>
+    <li><a href="tekton-pipelines-bluecompute-ce.html">Configure Tekton Pipelines for bluecompute-ce</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/hollisc/hollisc.github.io/edit/gh-pages/web/modules/ROOT/pages/tekton-pipelines-bluecompute-ce.adoc">Edit this Page</a></div>
+  </div>
+<article class="doc">
+<h1 class="page">Configure a Tekton CICD Pipeline for the Web application</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This <a href="https://github.ibm.com/CASE-DevOps-GSE/DevOps/blob/master/bluecompute-ce-tekton-pipelines/README.md">README</a> is a follow on to deploying <code>bluecompute-ce</code> on an OpenShift cluster and will focus on three activities:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Configure the BlueCompute Web app deployment to pull images from the IBM Container Registry.</p>
+</li>
+<li>
+<p>Configure and manually validate a Tekton CICD pipeline.</p>
+</li>
+<li>
+<p>Configure a Tekton Webhook to trigger the pipeline upon a push.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/BlueCompute-DevOps-Tekton.png" alt="Tekton Pipeline Architecture">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements:</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>A deployed OpenShift cluster.</p>
+</li>
+<li>
+<p>Install Git CLI <code>git</code>, Docker CLI <code>docker</code>, Kubernetes CLI <code>kubectl</code>, and OpenShift CLI <code>oc</code>.</p>
+</li>
+<li>
+<p>Deploy <code>bluecompute-ce</code> reference application - <a href="https://github.ibm.com/CASE-DevOps-GSE/DevOps/blob/master/bluecompute-ce/README.md">Instructions</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_tekton_pipeline_dashboard_and_webhook_extension"><a class="anchor" href="#_install_tekton_pipeline_dashboard_and_webhook_extension"></a>Install Tekton Pipeline, Dashboard and Webhook extension</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Previous releases for all three components are available <a href="https://storage.googleapis.com/tekton-releases/">here</a>.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Install <a href="https://github.com/tektoncd/pipeline/blob/master/docs/install.md">Tekton Pipelines</a>:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>  # Create a new project called `tekton-pipelines`
+  oc new-project tekton-pipelines
+
+# The `tekton-pipelines-controller` service account needs the `anyuid` security context constraint in order to run the webhook pod. +
+  oc adm policy add-scc-to-user anyuid -z tekton-pipelines-controller
+
+# Install latest version of Tekton Pipelines
+  oc apply --filename https://storage.googleapis.com/tekton-releases/latest/release.yaml
+
+----
+
+2. Install [Tekton Dashboard](https://github.com/tektoncd/dashboard):
+----
+
+# Install v0.2.0 of Tekton Dashboard
+  kubectl apply --filename https://github.com/tektoncd/dashboard/releases/download/v0.2.0/openshift-tekton-dashboard.yaml --validate=false
+
+# Retrieve the Tekton Dashboard Route (ie. tekton-dashboard-tekton-pipelines.+++&lt;cluster name=""&gt;+++-ibm-+++&lt;unique key=""&gt;+++.us-south.containers.appdomain.cloud ) oc get route+++&lt;/unique&gt;++++++&lt;/cluster&gt;+++
+
+----
+![Tekton Dashboard](../static/imgs/tekton-dashboard.png)
+
+3. Install [Tekton Webhook Extension](https://github.com/tektoncd/experimental/blob/master/webhooks-extension/docs/InstallReleaseBuild.md):
+----
+
+# Install latest version of Tekton Webhook Extension
+  oc apply -f https://github.com/tektoncd/dashboard/releases/download/v0.2.0/openshift-webhooks-extension.yaml
+
+----
+**Note**: Refresh the Tekton Dashboard URL and the Webhook option should be available now on the left hand menu.  If you experience an error viewing the Webhooks page on Firefox, try the Chrome browser.
+![Tekton Webhook Menu Selection](../static/imgs/tekton-webhook-menu-selection.png)
+
+
+## Update the Web Deployment to pull images from IBM Container Registry instead of Dockerhub:
+1. Create an API key for use by the service account to access the Registry.  Instruction are available in this [link](https://cloud.ibm.com/docs/iam?topic=iam-userapikey#create_user_key).
+
+2. Validate the API key and push BlueCompute web docker image to the IBM Container Registry using your local Docker CLI.
+----
+
+= Log in to IBM Container Registry using the generated API key
+
+docker login -u iamapikey -p +++&lt;your_apikey&gt;++++++&lt;registry_url&gt;+++For namespaces set up in AP-North, use jp.icr.io For namespaces set up in AP-South, use au.icr.io For namespaces set up in EU-Central, use de.icr.io For namespaces set up in UK-South, use uk.icr.io For namespaces set up in US-South, use us.icr.io+++&lt;/registry_url&gt;++++++&lt;/your_apikey&gt;+++
+
+----
+![Docker Login](../static/imgs/docker-login.png)
+
+3. Log in to [IBM Cloud](https://cloud.ibm.com/), select OpenShift and click on Registry.
+![IBM Container Registry](../static/imgs/ibm-container-registry.png)
+
+4. Pull the BlueCompute web image from Dockerhub
+----
+
+docker pull ibmcase/bluecompute-web:0.6.0
+
+----
+![Docker Pull from Dockerhub](../static/imgs/docker-pull-image-dockerhub.png)
+
+5. Tag the image with the IBM Container Registry URL.
+----
+
+docker tag ibmcase/bluecompute-web:0.6.0 us.icr.io/+++&lt;user&gt;+++/bluecompute-web:0.6.0+++&lt;/user&gt;+++
+
+----
+![Docker Tag](../static/imgs/docker-tag.png)
+
+6. Push the image to IBM Container Registry
+----
+
+docker push us.icr.io/+++&lt;user&gt;+++/bluecompute-web:0.6.0+++&lt;/user&gt;+++
+
+----
+![Docker Push](../static/imgs/docker-push.png)
+
+ Verify the image appears in the IBM Container Registry.
+![IBM Container Registry](../static/imgs/updated-ibm-container-registry.png)
+
+7. Create an image pull secret with the API key.  Refer to this [link](https://cloud.ibm.com/docs/containers?topic=containers-images#other_registry_accounts) for detailed instructions.
+----
+
+= Create a docker-registry secret
+
+kubectl --namespace +++&lt;kubernetes_namespace&gt;+++create secret docker-registry +++&lt;secret_name&gt;+++--docker-server=+++&lt;registry_URL&gt;+++--docker-username=iamapikey --docker-password=+++&lt;api_key_value&gt;+++--docker-email=+++&lt;docker_email&gt;++++++&lt;/docker_email&gt;++++++&lt;/api_key_value&gt;++++++&lt;/registry_URL&gt;++++++&lt;/secret_name&gt;++++++&lt;/kubernetes_namespace&gt;+++
+
+----
+
+8. Update the default service account with the image pull secret.  Refer to this [link](https://cloud.ibm.com/docs/containers?topic=containers-images#use_imagePullSecret) for detailed instructions.
+----
+
+= Patch the default service account with the image pull secret
+
+kubectl patch -n +++&lt;namespace_name&gt;+++serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"+++&lt;image_pull_secret_name&gt;+++"}}]'+++&lt;/image_pull_secret_name&gt;++++++&lt;/namespace_name&gt;+++
+
+----
+
+9. Update Bluecompute Web deployment with the image from IBM Container Registry.
+  - From OpenShift console, click `bluecompute` project, select Application &gt; Deployments and click on `web`.
+  - Select Actions &gt; Edit YAML and an inline editor will appear.  Search for `image: 'ibmcase/bluecompute-web:0.6.0'` and update the image reference to the image you uploaded to the IBM Container Registry (ie. "us.icr.io/&lt;user&gt;/bluecompute-web:0.6.0").
+  - Verify the pod is able to pull the image successfully.  You can monitor the termination of the existing pod for the web application and creation of a new pod using `kubectl get pods -w`.
+  ![Update Deployment with new image](../static/imgs/deployment-update-image.png)
+
+
+## Create Tekton Pipeline:
+1. Clone the BlueCompute Web repository.
+  - Clone the [repository](https://github.com/hollisc/refarch-cloudnative-bluecompute-web) and push up the contents to your own repository.  This will be referenced by the Tekton CICD pipeline further in this README.
+2. Clone the git repository for the Tekton yamls.
+----
+
+git clone git@github.ibm.com:CASE-DevOps-GSE/DevOps.git
+cd DevOps
+cd bluecompute-ce-tekton-pipelines
+
+----
+3. Verify oc cli is set to use `bluecompute` project.
+----
+
+oc project
+
+----
+4. Create push secret.
+----
+
+= Create Kubernetes Secret
+
+kubectl create secret generic ibm-cr-push-secret --type="kubernetes.io/basic-auth" --from-literal=username=iamapikey --from-literal=password=+++&lt;API Key=""&gt;++++++&lt;/API&gt;+++
+
+= Add annotation to the secret:
+
+kubectl annotate secret ibm-cr-push-secret tekton.dev/docker-0=us.icr.io
+
+----
+5. Create a `pipeline-account` service account, role and rolebinding:
+----
+
+= Create the pipeline-account service account
+
+kubectl apply -f pipeline-account.yaml
+
+----
+6. Create an image pull secret with the API key generated previously.
+----
+
+kubectl create secret docker-registry ibm-cr-pull-secret --docker-server=us.icr.io --docker-username=iamapikey --docker-password=+++&lt;api_key_value&gt;+++--docker-email=+++&lt;docker_email&gt;++++++&lt;/docker_email&gt;++++++&lt;/api_key_value&gt;+++
+
+----
+7. Update the `pipeline-account` service account with the image pull secret created.
+----
+
+= Patch the default service account with the image pull secret
+
+kubectl patch serviceaccount/pipeline-account --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"ibm-cr-pull-secret"}}]'
+
+----
+8. Create a clusteradmin rolebinding for the `pipeline-account`.  **NOTE**: This should not be done in production and the service account should only be set with permissions required to update deployment resource.
+----
+
+= Create clusteradmin rolebinding
+
+kubectl apply -f clusteradmin-rolebinding.yaml
+
+----
+9. Create the Task resources.
+----
+
+= Create the build task
+
+kubectl apply -f Tasks/source-to-image.yaml
+
+= Create the deploy task
+
+kubectl apply -f Tasks/deploy-using-kubectl.yaml
+
+----
+10. Create the PipelineResource resources.
+----
+
+= Update the Git repository URL and IBM Container Registry URL values.
+
+* Update the following values:
+ us.icr.io/+++&lt;user&gt;+++/bluecompute-web https://github.com/+++&lt;Git Org=""&gt;+++/refarch-cloudnative-bluecompute-web+++&lt;/Git&gt;++++++&lt;/user&gt;+++
++
+= Create the git and image pipeline resources.
++
+kubectl apply -f PipelineResources/bluecompute-web-pipeline-resources.yaml
++
+----
+11. Create the Pipeline resource.
+----
++
+= Create the Pipeline resource
++
+kubectl apply -f Pipelines/build-and-deploy-pipeline.yaml</code></pre>
+</div>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Verify the Tekton resources were created from the Tekton Dashboard.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pipeline
+<span class="image"><img src="static/imgs/tekton-pipeline.png" alt="Tekton Pipeline"></span></p>
+</li>
+<li>
+<p>PipelineResources
+<span class="image"><img src="static/imgs/tekton-pipelineresources.png" alt="Tekton PipelineResources"></span></p>
+</li>
+<li>
+<p>Tasks
+<span class="image"><img src="static/imgs/tekton-tasks.png" alt="Tekton Tasks"></span></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Manually run the Tekton Pipeline.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Let&#8217;s validate the various pieces of the Tekton pipeline works.  This can be achieved by a PipelineRun.  Before we kick off the pipeline, let&#8217;s update <code>PipelineRuns/bluecompute-web-pipeline-run.yaml</code>.</p>
+</li>
+<li>
+<p>Update the YAML with your IBM Container Registry URL by updating the value <code>us.icr.io/&lt;user&gt;/bluecompute-web</code>.</p>
+</li>
+<li>
+<p>Start the pipeline by running the command:
+<code>kubectl create -f PipelineRuns/bluecompute-web-pipeline-run.yaml</code>.  Note that the name of the pipelinerun resource is auto-generated (refer to metatdata.generateName property) so <code>kubectl apply</code> cannot be used otherwise an error will be thrown.</p>
+</li>
+<li>
+<p>Description of the pod status during the execution of a Tekton pipeline.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>bluecompute-web-pr-5522c-build-task-*</code> pod is executing the build task.  It starts the pre-defined init containers followed by the steps defined in the Tekton Build Task.</p>
+</li>
+<li>
+<p>The <code>bluecompute-web-pr-5522c-deploy-task-*</code> pod is executing the deployment task.  It starts the init containers followed by the steps defined in the Tekton Deploy Task.</p>
+</li>
+<li>
+<p>Once the deployment is complete, the existing <code>web</code> application pod is terminated and a new <code>web</code> pod is started referencing the new image that was created and pushed to the IBM Container Registry.
+<span class="image"><img src="static/imgs/tekton-pipeline-pod-status.png" alt="Manual run of Tekton pipeline"></span></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configure_tekton_github_webhook"><a class="anchor" href="#_configure_tekton_github_webhook"></a>Configure Tekton Github Webhook:</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Generate and save the Github token.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to github.com/settings/tokens and click Generate new token.</p>
+</li>
+<li>
+<p>Check the admin:repo_hook option and click Generate token.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Open the Tekton Dashboard in a browser and click on Webhooks item in the left hand menu and select "Add Webhook".</p>
+</li>
+<li>
+<p>Create an <code>Access Token</code> by clicking on the <code>+</code> and specifying a name and the Github token generated in the previous step.
+<span class="image"><img src="static/imgs/tekton-access-token.png" alt="Tekton Webhook Access Token"></span></p>
+</li>
+<li>
+<p>Fill in the fields similar to below but use your own Github repository and Docker Registry.  Click Create.
+<span class="image"><img src="static/imgs/tekton-webhook-config.png" alt="Tekton Webhook Configuration"></span></p>
+</li>
+<li>
+<p>A Tekton Webhook has been configured.
+<span class="image"><img src="static/imgs/tekton-webhook.png" alt="Tekton Webhook"></span></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_validate_webhook_by_pushing_in_a_change_to_the_web_application"><a class="anchor" href="#_validate_webhook_by_pushing_in_a_change_to_the_web_application"></a>Validate webhook by pushing in a change to the web application:</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre>Currently there is an open bug related to timing issue that causes PipelineRuns to fail if the creation of the PipelineResources are not completed in time.
+This is tracked via https://github.com/tektoncd/experimental/issues/240.</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Clone the forked bluecompute-web github repository from earlier.</p>
+<div class="listingblock">
+<div class="content">
+<pre>git clone https://github.com/&lt;Your Git Org&gt;/refarch-cloudnative-bluecompute-web
+cd refarch-cloudnative-bluecompute-web</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Make a change to the web application homepage and commit the change.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Edit the homepage (/StoreWebApp/public/resources/components/views/home.html) and save your change.</p>
+</li>
+<li>
+<p>Verify your change is detected with <code>git status</code></p>
+</li>
+<li>
+<p>Commit your change <code>git commit -am "Update homepage"</code></p>
+</li>
+<li>
+<p>Push the change to the <code>spring</code> branch <code>git push origin spring</code></p>
+</li>
+<li>
+<p>Monitor the pods in the "bluecompute" project and verify a PipelineRun was triggered and a new <code>web</code> application pod is started.
+<code>kubectl get pods -w -n bluecompute</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="static/imgs/webhook-tekton-pipeline-pod-status.png" alt="Webhook Triggered Tekton Pipeline"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternatively, one can monitor the webhook triggered pipelinerun from the Tekton Dashboard as well.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PipelineRun View:
+<span class="image"><img src="static/imgs/tekton-dashboard-pipelinerun.png" alt="Tekton Dashboard View"></span></p>
+</li>
+<li>
+<p>TaskRun View:
+<span class="image"><img src="static/imgs/tekton-dashboard-taskruns.png" alt="Tekton Dashboard View"></span></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_uninstall_tekton_components"><a class="anchor" href="#_uninstall_tekton_components"></a>Uninstall Tekton components:</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre># Delete Tekton Webhook Extension
+oc delete -f https://github.com/tektoncd/dashboard/releases/latest/download/openshift-webhooks-extension.yaml
+# Delete Tekton Dashboard
+kubectl delete --filename https://github.com/tektoncd/dashboard/releases/download/v0.2.0/openshift-tekton-dashboard.yaml
+# Delete Tekton Pipeline
+oc delete --filename https://storage.googleapis.com/tekton-releases/latest/release.yaml</pre>
+</div>
+</div>
+</div>
+</div>
+</article>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

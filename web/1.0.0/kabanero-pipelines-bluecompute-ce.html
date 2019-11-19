@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Configure a Kabanero CICD Pipeline for the Web application :: DevOps Garage Solution Engineering</title>
+    <link rel="canonical" href="https://hollisc.github.io/web/1.0.0/kabanero-pipelines-bluecompute-ce.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        DevOps Garage Solution Engineering
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="web" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">DevOps Garage Solution Engineering</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Welcome</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="deploy-bluecompute-ce.html">Deploy bluecompute-ce Cloud Native application on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="tekton-pipelines-bluecompute-ce.html">Configure Tekton Pipelines for bluecompute-ce</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="kabanero-pipelines-bluecompute-ce.html">Configure Kabanero Pipeline for bluecompute-ce</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#troubleshoot-tekton-pipelines.adoc">Troubleshoot Tekton Pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Blogs</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://medium.com/ibm-garage/2019-devops-trends-4f8f9b476ac7" target="_blank" rel="noopener">2019 DevOps Trends</a></span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://medium.com/@acmThinks/devsecops-58e0aa323412" target="_blank" rel="noopener">DevSecOps</a></span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://medium.com/@acmThinks/devsecops-design-development-fa46daddcae2" target="_blank" rel="noopener">DevSecOps: Design &amp; Development</a></span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://medium.com/ibm-garage/devsecops-delivery-7ca8c39d93cf" target="_blank" rel="noopener">DevSecOps Secure Delivery</a></span>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Videos</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://youtu.be/UbtB4sMaaNM" target="_blank" rel="noopener">What is DevOps?</a></span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text"><a href="https://youtu.be/iITmoI0s1DQ" target="_blank" rel="noopener">What is Continuous Improvement?</a></span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevOps Garage Solution Engineering</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">DevOps Garage Solution Engineering</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main>
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">DevOps Garage Solution Engineering</a></li>
+    <li>Tutorials</li>
+    <li><a href="kabanero-pipelines-bluecompute-ce.html">Configure Kabanero Pipeline for bluecompute-ce</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/hollisc/hollisc.github.io/edit/gh-pages/web/modules/ROOT/pages/kabanero-pipelines-bluecompute-ce.adoc">Edit this Page</a></div>
+  </div>
+<article class="doc">
+<h1 class="page">Configure a Kabanero CICD Pipeline for the Web application</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This <a href="https://github.ibm.com/CASE-DevOps-GSE/DevOps/blob/master/bluecompute-ce-tekton-pipelines/README.md">README</a> is a follow on to deploying <code>bluecompute-ce</code> on an OpenShift cluster and will focus on the following activities.  The screen captures provided are based on a Managed OpenShift 3.11 cluster with IBM Cloud Pak for Applications v3.0.1 running on IBM Cloud.  Tekton v0.5.2 is bundled into this version of the Cloud Pak for Application install.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Configure the BlueCompute Web app deployment to pull images from the IBM Container Registry.</p>
+</li>
+<li>
+<p>Configure and manually validate a Kabanero CICD pipeline.</p>
+</li>
+<li>
+<p>Configure a Tekton Webhook to trigger the Kabanero pipeline upon a push.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements:</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>A deployed OpenShift cluster.</p>
+</li>
+<li>
+<p>Install Git CLI <code>git</code>, Docker CLI <code>docker</code>, Kubernetes CLI <code>kubectl</code>, and OpenShift CLI <code>oc</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_cloud_pak_for_application"><a class="anchor" href="#_install_cloud_pak_for_application"></a>Install Cloud Pak for Application:</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For Managed OpenShift 3.x instances on IBM Cloud,</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in to <a href="https://cloud.ibm.com/">IBM Cloud</a> and go to the Catalog.</p>
+</li>
+<li>
+<p>Select <code>Software</code> &gt; <code>Cloud Pak for Applications</code>.</p>
+</li>
+<li>
+<p>Select the target Red Hat OpenShift cluster to install the Cloud Pak on and enter or select a project.</p>
+</li>
+<li>
+<p>Before the install can start, a pre-installation script must be run.  The script creates customized security context constraints and grants access to the service accounts that are required for Cloud Pak for Applications to install successfully. Click the <code>Run script</code> button to trigger the script and wait for it to complete successfully.</p>
+</li>
+<li>
+<p>Select the checkbox under Summary on the right side of the page and click Install.</p>
+</li>
+<li>
+<p>Check the logs to verify the install completes successfully.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <a href="https://cloud.ibm.com/schematics/workspaces">IBM Cloud Schematics</a> service will have a workspace tracking the terraform install activity for the installation of the Cloud Pak.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy_the_bluecompute_ce_application_to_the_kabanero_namespace"><a class="anchor" href="#_deploy_the_bluecompute_ce_application_to_the_kabanero_namespace"></a>Deploy the <code>bluecompute-ce</code> application to the <code>kabanero</code> namespace</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow the steps documented in these <a href="https://github.ibm.com/CASE-DevOps-GSE/DevOps/blob/master/bluecompute-ce/README.md">instructions</a>.  Ensure that your <code>oc</code> CLI are set to the <code>kabanero</code> project by <code>oc project kabanero</code> or add <code>-n kabanero</code> for any <code>oc</code> commands.  For step 2, the updated commands to set the Security Context Constraints (SCC) for the <code>default</code> Service Account are listed below.</p>
+<div class="listingblock">
+<div class="content">
+<pre>oc adm policy add-scc-to-user anyuid system:serviceaccount:kabanero:default
+oc adm policy add-scc-to-user privileged system:serviceaccount:kabanero:default</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/kabanero-bluecompute-scc-policy.png" alt="Bluecompute SCC Policy">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_update_the_web_deployment_to_pull_images_from_ibm_container_registry_instead_of_dockerhub"><a class="anchor" href="#_update_the_web_deployment_to_pull_images_from_ibm_container_registry_instead_of_dockerhub"></a>Update the Web Deployment to pull images from IBM Container Registry instead of Dockerhub:</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create an API key for use by the service account to access the Registry.  Instruction are available in this <a href="https://cloud.ibm.com/docs/iam?topic=iam-userapikey#create_user_key">link</a>.</p>
+</li>
+<li>
+<p>Validate the API key and push BlueCompute web docker image to the IBM Container Registry using your local Docker CLI.</p>
+<div class="listingblock">
+<div class="content">
+<pre># Log in to IBM Container Registry using the generated API key
+docker login -u iamapikey -p &lt;your_apikey&gt; &lt;registry_url&gt;
+ For namespaces set up in AP-North, use jp.icr.io
+ For namespaces set up in AP-South, use au.icr.io
+ For namespaces set up in EU-Central, use de.icr.io
+ For namespaces set up in UK-South, use uk.icr.io
+ For namespaces set up in US-South, use us.icr.io</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/docker-login.png" alt="Docker Login">
+</div>
+</div>
+</li>
+<li>
+<p>Log in to <a href="https://cloud.ibm.com/">IBM Cloud</a>, select OpenShift and click on Registry.
+<span class="image"><img src="static/imgs/ibm-container-registry.png" alt="IBM Container Registry"></span></p>
+</li>
+<li>
+<p>Pull the BlueCompute web image from Dockerhub</p>
+<div class="listingblock">
+<div class="content">
+<pre>docker pull ibmcase/bluecompute-web:0.6.0</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/docker-pull-image-dockerhub.png" alt="Docker Pull from Dockerhub">
+</div>
+</div>
+</li>
+<li>
+<p>Tag the image with the IBM Container Registry URL.</p>
+<div class="listingblock">
+<div class="content">
+<pre>docker tag ibmcase/bluecompute-web:0.6.0 us.icr.io/&lt;user&gt;/bluecompute-web:0.6.0</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/docker-tag.png" alt="Docker Tag">
+</div>
+</div>
+</li>
+<li>
+<p>Push the image to IBM Container Registry</p>
+<div class="listingblock">
+<div class="content">
+<pre>docker push us.icr.io/&lt;user&gt;/bluecompute-web:0.6.0</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/docker-push.png" alt="Docker Push">
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Verify the image appears in the IBM Container Registry.
+<span class="image"><img src="static/imgs/updated-ibm-container-registry.png" alt="IBM Container Registry"></span></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create an image pull secret with the API key.  Refer to this <a href="https://cloud.ibm.com/docs/containers?topic=containers-images#other_registry_accounts">link</a> for detailed instructions.</p>
+<div class="listingblock">
+<div class="content">
+<pre># Create a pull image secret
+kubectl create secret docker-registry &lt;secret_name&gt; --docker-server=&lt;registry_URL&gt; --docker-username=iamapikey --docker-password=&lt;api_key_value&gt; --docker-email=&lt;docker_email&gt;</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/ibm-cr-pull-image-secret.png" alt="Pull Image Secret">
+</div>
+</div>
+</li>
+<li>
+<p>Update the default service account with the image pull secret.  Refer to this <a href="https://cloud.ibm.com/docs/containers?topic=containers-images#use_imagePullSecret">link</a> for detailed instructions.</p>
+<div class="listingblock">
+<div class="content">
+<pre># Patch the default service account with the image pull secret
+kubectl patch serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"&lt;image_pull_secret_name&gt;"}}]'</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/patch-sa-default-pull-image-secret.png" alt="Patch default service account with pull image secret">
+</div>
+</div>
+</li>
+<li>
+<p>Update Bluecompute Web deployment with the image from IBM Container Registry.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>From OpenShift console, click <code>kabanero</code> project, select Application &gt; Deployments and click on <code>web</code>.</p>
+</li>
+<li>
+<p>Select Actions &gt; Edit YAML and an inline editor will appear.  Search for <code>image: 'ibmcase/bluecompute-web:0.6.0'</code> and update the image reference to the image you uploaded to the IBM Container Registry (ie. <code>image: 'us.icr.io/&lt;user&gt;/bluecompute-web:0.6.0'</code>). Click Save.</p>
+</li>
+<li>
+<p>Verify the pod is able to pull the image successfully.  You can monitor the termination of the existing pod for the web application and creation of a new pod using <code>kubectl get pods -w</code>.
+<span class="image"><img src="static/imgs/deployment-update-image.png" alt="Update Deployment with new image"></span></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Refreh the <code>bluecompute</code> web application in your browser and verify that the application still loads correctly.</p>
+</li>
+<li>
+<p>Delete the <code>web</code> Deployment, Service and Route.  We will deploy these resources using the Kabanero Pipeline and AppsodyApplication CRD.  Verify that the pod is terminated and the application no longer loads on the browser.</p>
+<div class="listingblock">
+<div class="content">
+<pre>kubectl delete deployment web
+kubectl delete service web
+kubectl delete route web</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/delete-bluecompute-web-resources.png" alt="Delete bluecompute-web resources">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_kabanero_pipeline"><a class="anchor" href="#_create_kabanero_pipeline"></a>Create Kabanero Pipeline:</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For this activity, we will using a restructured <code>bluecompute-web</code> Github repository to use the out of the box <a href="https://github.com/appsody/stacks/tree/master/incubator/nodejs">nodejs Appsody Stack</a> and <a href="https://github.com/kabanero-io/collections/tree/master/incubator/nodejs">nodejs Kabanero Collection</a>.</p>
+</div>
+<div class="paragraph">
+<p>A future post will be created to provide a guide on how to restructure existing Github repositories to use Appsody Stacks and Kabanero Collections.  An alternative option is to create a custom Appsody Stack - <a href="https://appsody.dev/docs/stacks/create/">link</a>.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Fork the updated <a href="https://github.com/hollisc/refarch-cloudnative-bluecompute-web-appsody">BlueCompute Web repo in Appsody format</a> repository.  Browse to the BlueCompute Web repository and click on the Fork button on the top right corner. This will fork a repository under your own Git account.  The original <code>bluecompute-web</code> repository is <a href="https://github.com/ibm-cloud-architecture/refarch-cloudnative-bluecompute-web/tree/spring">here</a> for reference.</p>
+</li>
+<li>
+<p>Clone the git repository for the Kabanero Pipeline yamls.</p>
+<div class="listingblock">
+<div class="content">
+<pre>git clone git@github.ibm.com:CASE-DevOps-GSE/DevOps.git
+cd DevOps
+cd bluecompute-ce-kabanero-pipelines</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verify oc cli is set to use <code>kabanero</code> project.</p>
+<div class="listingblock">
+<div class="content">
+<pre>oc project</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/kabanero-oc-cli-project.png" alt="OC cli set to kabanero project">
+</div>
+</div>
+</li>
+<li>
+<p>Create a push image secret.</p>
+<div class="listingblock">
+<div class="content">
+<pre># Create Kubernetes Secret
+kubectl create secret generic ibm-cr-push-secret  --type="kubernetes.io/basic-auth" --from-literal=username=iamapikey --from-literal=password=&lt;API Key&gt;
+# Add annotation to the secret:
+kubectl annotate secret ibm-cr-push-secret tekton.dev/docker-0=us.icr.io</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/ibm-cr-push-image-secret.png" alt="Push image secret">
+</div>
+</div>
+</li>
+<li>
+<p>Update <code>kabanero-operator</code> service account with the push secret</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Edit the <code>kabanero-operator</code> service account with <code>kubectl edit sa kabanero-operator</code> and add <code>ibm-cr-push-secret</code> as a mountable secret.
+<span class="image"><img src="static/imgs/kabanero-operator-update-sa-push-secret.png" alt="Add push image secret to kabanero-operator service account"></span></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Update the <code>kabanero-operator</code> service account with the image pull secret created previously.</p>
+<div class="listingblock">
+<div class="content">
+<pre># Patch the kabanero-operator service account with the image pull secret
+kubectl patch serviceaccount/kabanero-operator --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"&lt;image_pull_secret_name&gt;"}}]'</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/kabanero-patch-sa-kabanero-operator-pull-image-secret.png" alt="Patch kabanero-operator service account with pull image secret">
+</div>
+</div>
+</li>
+<li>
+<p>Create the PipelineResource resources.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>From the cloned <code>DevOps</code> repository, modify <code>PipelineResources/bluecompute-web-pipeline-resources.yaml</code> to replace <code>&lt;Docker Registry URL&gt;/&lt;user&gt;/bluecompute-web-appsody</code> and <code>https://github.com/&lt;Git Org&gt;/refarch-cloudnative-bluecompute-web-appsody.git</code> values.  For those using the IBM Container Registry, the URL for the various regions listed below.</p>
+<div class="listingblock">
+<div class="content">
+<pre>  For namespaces set up in AP-North, use jp.icr.io
+  For namespaces set up in AP-South, use au.icr.io
+  For namespaces set up in EU-Central, use de.icr.io
+  For namespaces set up in UK-South, use uk.icr.io
+  For namespaces set up in US-South, use us.icr.io</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create the git and image pipeline resources.</p>
+<div class="listingblock">
+<div class="content">
+<pre>  kubectl apply -f PipelineResources/bluecompute-web-pipeline-resources.yaml</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/kabanero-create-pipelineresources.png" alt="Create Kabanero Pipeline Resources">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Verify the Tekton resources were created from the Tekton Dashboard.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PipelineResources
+<span class="image"><img src="static/imgs/kabanero-pipelineresources.png" alt="Kabanero PipelineResources"></span></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Manually run the Tekton Pipeline.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Let&#8217;s validate the Kabanero Pipeline using a PipelineRun.</p>
+</li>
+<li>
+<p>Start the pipeline by running the command: <code>kubectl create -f PipelineRuns/bluecompute-web-pipeline-run.yaml</code>.  Note that the name of the pipelinerun resource is auto-generated (refer to metatdata.generateName property) so <code>kubectl apply</code> cannot be used otherwise an error will be thrown.</p>
+</li>
+<li>
+<p>Description of the pod status during the execution of a Tekton pipeline.</p>
+</li>
+<li>
+<p>The <code>nodejs-manual-bluecompute-web-pr-j8mrq-build-task-*</code> pod is executing the build task.  It starts the pre-defined init containers followed by the steps defined in the Kabanero Nodejs Collection Build Task.</p>
+</li>
+<li>
+<p>The <code>nodejs-manual-bluecompute-web-pr-j8mrq-deploy-task-*</code> pod is executing the deployment task.  It starts the init containers followed by the steps defined in the Kabanero Nodejs Collection Deploy Task.</p>
+</li>
+<li>
+<p>Once the deployment is complete, a <code>web</code> pod is running and referencing the new image that was created and pushed to the IBM Container Registry.
+<span class="image"><img src="static/imgs/kabanero-pipeline-pod-status.png" alt="Manual run of Kabanero pipeline"></span></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Validate the deployment of <code>bluecompute-web</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Refresh the IBM Container Registry and you will notice that a new image <code>/&lt;user&gt;/bluecompute-web-appsody:latest</code> exists.</p>
+</li>
+<li>
+<p>Let&#8217;s go ahead and retrieve the URL for the <code>web</code> application using <code>oc get route</code> and paste that into a browser.</p>
+</li>
+<li>
+<p>You will notice that the <code>bluecompute-web</code> application is not available, so what happened?  Although the <code>web</code> pod is running successfully, the <code>web</code> Service definition needs to be updated.  Run <code>oc get svc web -o yaml</code> to view the current Service in YAML format.  You will notice that both <code>port</code> and <code>targetPort</code> are set to <code>80</code>.  The application requires <code>targetPort</code> to be set to <code>8000</code>.  Modify the Service from the OpenShift console or using the <code>oc</code> CLI command <code>oc edit svc web</code> and then refresh your browser and the <code>bluecompute-web</code> application will load.</p>
+</li>
+<li>
+<p>:warning: In the <a href="https://github.com/hollisc/refarch-cloudnative-bluecompute-web-appsody">BlueCompute Web</a> repository, the <code>app-deploy.yaml</code> defines the spec for an AppsodyApplication CRD.  This file is generated using the <code>appsody deploy --generate-only</code> command.  The pipeline uses this yaml to create an instance of the AppsodyApplication resource.  The Appsody Operator will then create a Deployment, Service and Route for the target application.  Currently, the <code>AppsodyApplication</code> CRD only supports the parameters defined in this <a href="https://github.com/appsody/appsody-operator/blob/master/doc/user-guide.md#custom-resource-definition-crd">link</a>.  An <a href="https://github.com/appsody/appsody-operator/issues/181">enhancement request</a> has been opened to support <code>targetPort</code> as an optional parameter.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configure_tekton_github_webhook"><a class="anchor" href="#_configure_tekton_github_webhook"></a>Configure Tekton Github Webhook:</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Generate and save the Github token.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to github.com/settings/tokens and click Generate new token.</p>
+</li>
+<li>
+<p>Check the admin:repo_hook option and click Generate token.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Open the Tekton Dashboard in a browser and click on Webhooks item in the left hand menu and select "Add Webhook".</p>
+</li>
+<li>
+<p>Create an <code>Access Token</code> by clicking on the <code>+</code> and specifying a name and the Github token generated in the previous step.
+<span class="image"><img src="static/imgs/appsody-access-token.png" alt="Tekton Webhook Access Token"></span></p>
+</li>
+<li>
+<p>Fill in the fields similar to below but use your own Github repository and Docker Registry.  Click Create.
+<span class="image"><img src="static/imgs/appsody-webhook-config.png" alt="Tekton Webhook Configuration"></span></p>
+</li>
+<li>
+<p>A Tekton Webhook has been configured.
+<span class="image"><img src="static/imgs/appsody-webhook.png" alt="Tekton Webhook"></span></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_validate_webhook_by_pushing_in_a_change_to_the_web_application"><a class="anchor" href="#_validate_webhook_by_pushing_in_a_change_to_the_web_application"></a>Validate webhook by pushing in a change to the web application:</h2>
+<div class="sectionbody">
+<hr>
+<div class="paragraph">
+<p>To work around this, we will set the <code>appsody-operator</code> with the same permission as the <code>kabanero-operator</code> service account, which was used in the manual pipelinerun.  This service account has been set with clusteradmin access by default.  This should not be done in production and the service account should only be set with permissions required to execute the pipeline.
+<strong>*</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Update permission of <code>appsody-operator</code> service account.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Edit the clusterrolebinding for kabanero-operator <code>oc edit clusterrolebinding &lt;clusterrolebinding name&gt;</code> and update it to match what is highlighted in the red boxes.  In my particular cluster, the clusterrolebinding name is <code>cluster-admin-3</code>.
+<span class="image"><img src="static/imgs/kabanero-webhook-appsody-operator-permission.png" alt="Update permission of appsody-operator"></span></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Update <code>appsody-operator</code> with image pull and push secrets.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Edit the <code>kabanero-operator</code> service account with <code>kubectl edit sa appsody-operator</code> and add <code>ibm-cr-push-secret</code> as a mountable secret.
+<span class="image"><img src="static/imgs/appsody-operator-update-sa-push-secret.png" alt="Add push image secret to appsody-operator service account"></span></p>
+</li>
+<li>
+<p>Update the <code>appsody-operator</code> service account with the image pull secret created previously.</p>
+<div class="listingblock">
+<div class="content">
+<pre>  # Patch the appsody-operator service account with the image pull secret
+  kubectl patch serviceaccount/appsody-operator --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"&lt;image_pull_secret_name&gt;"}}]'</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="static/imgs/kabanero-patch-sa-appsody-operator-pull-image-secret.png" alt="Patch appsody-operator service account with pull image secret">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Clone the forked refarch-cloudnative-bluecompute-web-appsody github repository from earlier.</p>
+<div class="listingblock">
+<div class="content">
+<pre>git clone git@github.com:&lt;Github Org&gt;/refarch-cloudnative-bluecompute-web-appsody.git
+cd refarch-cloudnative-bluecompute-web-appsody</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Make a change to the web application homepage and commit the change.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Edit the homepage (/public/resources/components/views/home.html) and save your change.</p>
+</li>
+<li>
+<p>Verify your change is detected with <code>git status</code></p>
+</li>
+<li>
+<p>Commit your change <code>git commit -am "Update homepage"</code></p>
+</li>
+<li>
+<p>Push the change to the <code>master</code> branch <code>git push origin master</code></p>
+</li>
+<li>
+<p>Monitor the pods in the "bluecompute" project and verify a PipelineRun was triggered and a new <code>web</code> application pod is started.
+<code>kubectl get pods -w</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="static/imgs/webhook-appsody-pipeline-pod-status.png" alt="Webhook Triggered Tekton Pipeline"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternatively, one can monitor the webhook triggered pipelinerun from the Tekton Dashboard as well.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PipelineRun View:
+<span class="image"><img src="static/imgs/appsody-dashboard-pipelinerun.png" alt="Tekton Dashboard View"></span></p>
+</li>
+<li>
+<p>TaskRun View:
+<span class="image"><img src="static/imgs/appsody-dashboard-taskruns.png" alt="Tekton Dashboard View"></span></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_uninstall_cloud_pak_for_application"><a class="anchor" href="#_uninstall_cloud_pak_for_application"></a>Uninstall Cloud Pak for Application:</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For Managed OpenShift 3.x instances on IBM Cloud,</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in to <a href="https://cloud.ibm.com/">IBM Cloud</a>, click the hamburger button on the top right and select <code>Schematics</code>.</p>
+</li>
+<li>
+<p>Select <code>Workspaces</code> and click on the Cloud Pak for Application installation workspace (ie. ibm-cp-application-MM-DD-YYYY).</p>
+</li>
+<li>
+<p>Select <code>Actions</code> &gt; <code>Destroy Resources</code> to start the uninstall.</p>
+</li>
+<li>
+<p>Once the uninstall is complete, delete the workspace (<code>Actions</code> &gt; <code>Delete Workspace</code>).</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Based on my recent testing, the Cloud Pak for Application projects still exist in the cluster even after the uninstall.  One can manually delete the projects from the OpenShift console (<code>istio-system</code>, <code>kabanero</code>, <code>kappnav</code>, <code>knative-eventing</code>, <code>knative-serving</code>, <code>knative-sources</code>, <code>openshift-pipelines</code>, <code>ta</code>).
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</article>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
