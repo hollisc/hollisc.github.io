@@ -1,3 +1,7 @@
 = Videos
-* video::UbtB4sMaaNM[What is DevOps\?^]
-* video::iITmoI0s1DQ[What is Continuous Improvement\?^]
+* video::UbtB4sMaaNM[youtube] 
+* video::iITmoI0s1DQ[youtube]
+
+
+* What is DevOps?
+* What is Continuous Improvement
