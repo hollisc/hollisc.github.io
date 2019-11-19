@@ -9,7 +9,9 @@
 * xref:blogs.adoc[Blogs]
 
 * Videos
+** https://www.youtube.com/watch?v=fp9_ubiKqFU[What is a Cloud Native app?^]
 ** https://youtu.be/UbtB4sMaaNM[What is DevOps?^]
+** https://youtu.be/J73MELGF6u0[What is DevSecOps?^]
 ** https://youtu.be/iITmoI0s1DQ[What is Continuous Improvement?^]
 
 * https://ibm-cloud-architecture.github.io/[IBM Garage Solution Engineering^]

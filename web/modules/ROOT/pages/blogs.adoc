@@ -1,6 +1,7 @@
 = Blogs
 
-* https://medium.com/ibm-garage/2019-devops-trends-4f8f9b476ac7[2019 DevOps Trends^]
-* https://medium.com/@acmThinks/devsecops-58e0aa323412[DevSecOps^]
-* https://medium.com/@acmThinks/devsecops-design-development-fa46daddcae2[DevSecOps: Design & Development^]
-* https://medium.com/ibm-garage/devsecops-delivery-7ca8c39d93cf[DevSecOps Secure Delivery^]
+* https://medium.com/ibm-garage/devsecops-delivery-7ca8c39d93cf[Oct 31, 2019 - DevSecOps Secure Delivery^]
+* https://medium.com/@acmThinks/devsecops-design-development-fa46daddcae2[Aug 30, 2019 - DevSecOps: Design & Development^]
+* https://medium.com/@acmThinks/devsecops-58e0aa323412[Aug 23, 2019 - DevSecOps^]
+* https://medium.com/ibm-garage/2019-devops-trends-4f8f9b476ac7[June 3, 2019 - 2019 DevOps Trends^]
+* https://stackoverflow.blog/2019/05/23/qa-ibm-cloud-garage-methods-lead-architect-on-the-companys-cloud-based-approach-to-operational-excellence[May 23, 2019 - IBM’s Garage Methodology Approach to Operational Excellence]
