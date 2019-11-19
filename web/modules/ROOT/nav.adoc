@@ -9,7 +9,7 @@
 * xref:blogs.adoc[Blogs]
 
 * Videos
-** https://youtu.be/UbtB4sMaaNM[What is DevOps\?^]
-** https://youtu.be/iITmoI0s1DQ[What is Continuous Improvement\?^]xref:videos.adoc[Videos]
+** https://youtu.be/UbtB4sMaaNM[What is DevOps?^]
+** https://youtu.be/iITmoI0s1DQ[What is Continuous Improvement?^]
 
 * https://ibm-cloud-architecture.github.io/[IBM Garage Solution Engineering^]
