@@ -1,7 +1,2 @@
 = Videos
-video::UbtB4sMaaNM[youtube]
 video::iITmoI0s1DQ[youtube]
-
-
-* What is DevOps?
-* What is Continuous Improvement
